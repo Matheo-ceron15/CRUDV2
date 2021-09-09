@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
+    android:layout_margin="15dp"
+
+    >
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="DATOS DEL ARTICULO" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_gravity="center"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/pdf" />
+
+    <EditText
+        android:id="@+id/et1"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/et2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/et3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/angry_btn"-->
+
+<!--        android:text="Guardar"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="30sp"-->
+
+<!--        android:layout_width="270dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:background="@drawable/buttonshape"-->
+<!--        android:shadowColor="#A8A8A8"-->
+<!--        android:shadowDx="0"-->
+<!--        android:shadowDy="0"-->
+<!--        android:shadowRadius="5"-->
+<!--        />-->
+</androidx.appcompat.widget.LinearLayoutCompat>
