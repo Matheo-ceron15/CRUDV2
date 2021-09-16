@@ -283,6 +283,6 @@ public class ConexionSQLite extends SQLiteOpenHelper {
     //==================================PAGINA 28=======================
 
 
-    
+
 
 }
