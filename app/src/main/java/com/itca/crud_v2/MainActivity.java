@@ -1,28 +1,37 @@
 package com.itca.crud_v2;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.itca.crud_v2.databinding.ActivityMainBinding;
-
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.itca.crud_v2.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+
+    private EditText et_codigo, et_descripcion, et_precio;
+    private Button btn_guardar, btn_consultar1, btn_consultar2, btn_eliminar, btn_actualizar;
+    private TextView tv_resultado;
+
+    boolean inputEt=false; boolean inputEd=false; boolean input1=false; int resultadolnsert=0;
+
+    Modal ventanas = new Modal();
+    ConexionSQLite conexion = new ConexionSQLite(this); Dto datos = new Dto();
+    AlertDialog.Builder dialogo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,4 +83,38 @@ public class MainActivity extends AppCompatActivity {
 //        return NavigationUI.navigateUp(navController, appBarConfiguration)
 //                || super.onSupportNavigateUp();
 //    }
+
+    public  boolean onKeyDonw(int keyCode, KeyEvent event){
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            new android.app.AlertDialog.Builder(this)
+                    .setIcon(R.drawable.close)
+                    .setTitle("Warning")
+                    .setMessage("¿Realmente desea salir?")
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            /*lntent intent —— new Intent(DashboardLuces.this, luces control sms.class),
+                            startActivity(intent),
+                            MainActivity.this.finishAffinity(),
+                            finish(),*/
+                            finishAffinity();
+                        }
+                    })
+                    .show();
+                // Si el listener devuelve true, significa que el evento esta procesado, y nadie debe hacer nada mas
+                return true;
+            }
+            //para las demas cosas, se reenvia el evento at listener habitual
+            return super.onKeyDown(keyCode, event);
+
+        }
+
+
+
+
+    //==================================HA MEDIAS DE LA PAGINA 33=======================
+
+
+
 }

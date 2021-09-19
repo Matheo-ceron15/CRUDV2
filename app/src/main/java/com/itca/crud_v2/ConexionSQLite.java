@@ -17,7 +17,7 @@ import java.util.Calendar;
 public class ConexionSQLite extends SQLiteOpenHelper {
  boolean estadoDelete=true;
     //Va representar la informacion que se va representar en el combo
- ArrayList<Dto>listaArticulo;
+ ArrayList<String> listaArticulo;
     //entidad que representa los datos de la tabla, en este caso la tabla articulos
  ArrayList<Dto>articulosList;
 
@@ -278,11 +278,87 @@ public class ConexionSQLite extends SQLiteOpenHelper {
         return  estado;
     }
 
+    public ArrayList<Dto> consultaListaArticulos(){
+        boolean estado = false;
+//SQLiteDatabase bd —— this.getWritableDatabase(),
+        SQLiteDatabase bd = this.getReadableDatabase();
+
+        Dto articulos = null;	//Creamos la instancia vacia.
+        articulosList = new ArrayList<Dto>();
+        try{
+            Cursor fila = bd.rawQuery("select * from articulos",null);
+            while (fila.moveToNext()){ articulos = new Dto();
+                articulos.setCodigo(fila.getInt(0));
+                articulos.setDescripcion(fila.getString(1));
+                articulos.setPrecio(fila.getDouble(2));
+
+                articulosList.add(articulos);
+
+                Log.i("codigo", String. valueOf(articulos.getCodigo()));
+                Log.i("descripcion", articulos.getDescripcion().toString());
+                Log.i("precio", String.valueOf(articulos.getPrecio()));
+            }
+        //obtenerListaArticulos;
+        }catch (Exception e){
+
+        }
+        return articulosList;
+    }
+
+    public ArrayList<String> obtenerListaArticulos() {
+        listaArticulo = new ArrayList<String>();
+//IistaArticulos —— new ArrayList<>(),
+        listaArticulo.add("Seleccione");
 
 
-    //==================================PAGINA 28=======================
+        for(int i=0;i<articulosList.size();i++){
+//IistaArticulos.add(String. valueOf(articulosList.get(i).getCodigo())),
+            listaArticulo.add(articulosList.get(i).getCodigo()+" ~ "+articulosList.get(i).getDescripcion());
+        }
+//bd(). close(),
+        return listaArticulo;
+
+    }
+
+    //Inicio del Método para crear lista de datos de la BD en el ListView.
+
+    public ArrayList<String> consultaListaArticulos1(){
+        boolean estado = false;
+//SQLiteDatabase bd —— this.getWritableDatabase(),
+        SQLiteDatabase bd = this.getReadableDatabase();
+
+        Dto articulos = null;	//Creamos la instancia vacia.
+        articulosList = new ArrayList<Dto>();
+
+        try{
+            Cursor fila = bd.rawQuery("select * from articulos",null); while (fila.moveToNext()){
+                articulos = new Dto();
+                articulos.setCodigo(fila.getInt(0));
+                articulos.setDescripcion(fila.getString(1));
+                articulos.setPrecio(fila.getDouble(2));
+
+                articulosList.add(articulos);
+            }
+
+            listaArticulo = new ArrayList<String>();
+//IistaArticulos —— new ArrayList<>(),
+//IistaArticulos.add(”Seleccione"),
+
+            for(int i=0;i<=articulosList.size();i++){
+//IistaArticulos. add(String. valueOf(adiculosList.get(i).getCodigo())),
+                listaArticulo.add(articulosList.get(i).getCodigo()+" ~ "+articulosList.get(i).getDescripcion());
+            }
+//bd(). close(),
+//return IistaArticulos,’
+
+        }catch (Exception e){
+        }
+
+//return articulosList,”
+        return listaArticulo;
+
+    }
 
 
-
-
+//FIN DE TODO EL CODIGO
 }
