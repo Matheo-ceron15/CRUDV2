@@ -1,19 +1,24 @@
 package com.itca.crud_v2;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.itca.crud_v2.databinding.ActivityMainBinding;
 
@@ -26,63 +31,14 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_guardar, btn_consultar1, btn_consultar2, btn_eliminar, btn_actualizar;
     private TextView tv_resultado;
 
-    boolean inputEt=false; boolean inputEd=false; boolean input1=false; int resultadolnsert=0;
+    boolean inputEt=false;
+    boolean inputEd=false;
+    boolean input1=false;
+    int resultadolnsert=0;
 
     Modal ventanas = new Modal();
     ConexionSQLite conexion = new ConexionSQLite(this); Dto datos = new Dto();
     AlertDialog.Builder dialogo;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.toolbar);
-
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Accion no disponible", Snackbar.LENGTH_LONG)
-                        .setAction("Accion", null).show();
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        return NavigationUI.navigateUp(navController, appBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
 
     public  boolean onKeyDonw(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_BACK){
@@ -102,18 +58,147 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
-                // Si el listener devuelve true, significa que el evento esta procesado, y nadie debe hacer nada mas
-                return true;
+            // Si el listener devuelve true, significa que el evento esta procesado, y nadie debe hacer nada mas
+            return true;
+        }
+        //para las demas cosas, se reenvia el evento at listener habitual
+        return super.onKeyDown(keyCode, event);
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.close));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.my_color1));
+        toolbar.setTitleMargin(0, 0, 0, 0);
+        toolbar.setSubtitle("CRUD SQLite-2021");
+        toolbar.setSubtitleTextColor(getResources().getColor(R.color.my_color));
+        toolbar.setTitle("Mateo Ceron");
+        setSupportActionBar(toolbar);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmacion();
             }
-            //para las demas cosas, se reenvia el evento at listener habitual
-            return super.onKeyDown(keyCode, event);
+        });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ventanas.Search(MainActivity.this);
+            }
+        });
+
+        et_codigo = (EditText) findViewById(R.id.et_codigo);
+        et_descripcion = (EditText) findViewById(R.id.et_descripcion);
+        et_precio = (EditText) findViewById(R.id.et_precio);
+        btn_guardar = (Button) findViewById(R.id.btn_guardar);
+        btn_consultar1 = (Button) findViewById(R.id.btn_consultar1);
+        btn_consultar2 = (Button) findViewById(R.id.btn_consultar2);
+        btn_eliminar = (Button) findViewById(R.id.btn_eliminar);
+        btn_actualizar = (Button) findViewById(R.id.btn_actualizar);
+//tv resultado —— (TextView) findViewByld(R.id.tv resultado),’
+
+        String senal = "";
+        String codigo = "";
+        String descripcion = "";
+        String precio = "";
+
+        try {
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            if (bundle != null){
+                codigo = bundle.getString("codigo");
+                senal = bundle.getString("senal");
+                descripcion = bundle.getString("descripcion");
+                precio = bundle.getString("precio");
+                if (senal.equals("1")){
+                    et_codigo.setText(codigo);
+                    et_descripcion.setText(descripcion);
+                    et_precio.setText(precio);
+                    //finish(),
+
+                }
+            }
+        }catch (Exception e){
 
         }
+    }
+
+
+    private  void  confirmacion(){
+        String mensaje = "Realmente desea salir?";
+        dialogo = new AlertDialog.Builder(MainActivity.this);
+        dialogo.setIcon(R.drawable.close);
+        dialogo.setTitle("Warning");
+        dialogo.setMessage(mensaje);
+        dialogo.setCancelable(false);
+        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogo, int id) {
+                MainActivity.this.finish();
+            }
+        });
+        dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogo, int id) {
+
+            }
+        });
+        dialogo.show();
+
+    }
+
+    private void setSupportActionBar(Toolbar toolbar) {
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            et_codigo.setText(null);
+            et_descripcion.setText(null);
+            et_precio.setText(null);
+            return true;
+        }else if(id == R.id.action_listaArticulos){
+            Intent listViewActivity = new Intent(MainActivity.this, ConsultaSpinner.class);
+            startActivity(listViewActivity);
+            return  true;
+        }else if(id == R.id.action_listaArticulos1){
+            Intent listViewActivity = new Intent(MainActivity.this, ListViewArticulos.class);
+            startActivity(listViewActivity);
+            return  true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 
 
-    //==================================HA MEDIAS DE LA PAGINA 33=======================
+    //==================================HA MEDIAS DE LA PAGINA 36=======================
 
 
 

@@ -39,9 +39,10 @@
         app:srcCompat="@drawable/pc_gamer" />
 
     <EditText
+
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
-        android:id="@+id/et1"
+        android:id="@+id/et_codigo"
         android:layout_width="350dp"
         android:paddingLeft="25dp"
         android:layout_height="45dp"
@@ -57,7 +58,7 @@
         />
 
     <EditText
-        android:id="@+id/et2"
+        android:id="@+id/et_descripcion"
         android:layout_marginTop="10dp"
         android:layout_width="350dp"
         android:layout_height="45dp"
@@ -65,7 +66,7 @@
         android:paddingLeft="25sp"
         android:drawableLeft="@drawable/descripcion"
         android:layout_marginLeft="10dp"
-        android:hint="Ingrese codigo"
+        android:hint="Ingrese descripcion"
         android:inputType="number"
         android:background="@drawable/botones2"
         android:shadowColor="#A8A8A8"
@@ -74,14 +75,14 @@
         android:shadowRadius="5" />
 
     <EditText
-        android:id="@+id/et3"
+        android:id="@+id/et_precio"
         android:layout_width="350dp"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:paddingLeft="25sp"
         android:layout_marginLeft="10dp"
-        android:hint="Ingrese codigo"
+        android:hint="Ingrese precio"
         android:inputType="number"
         android:background="@drawable/botones2"
         android:shadowColor="#A8A8A8"
@@ -92,7 +93,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginTop="30dp"
-        android:id="@+id/btn1"
+        android:id="@+id/btn_guardar"
         android:text="Guardar"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -109,7 +110,7 @@
         android:paddingLeft="100dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn2"
+        android:id="@+id/btn_consultar1"
         android:layout_marginTop="10dp"
         android:text="Consultar codigo"
         android:textColor="#FFFFFF"
@@ -126,7 +127,7 @@
         android:shadowDy="0"
         android:shadowRadius="5" />
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn3"
+        android:id="@+id/btn_consultar2"
         android:layout_marginTop="10dp"
         android:text="Consultar por descripcion"
         android:textColor="#FFFFFF"
@@ -140,7 +141,7 @@
         android:shadowDy="0"
         android:shadowRadius="5" />
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn4"
+        android:id="@+id/btn_eliminar"
         android:layout_marginTop="10dp"
         android:text="Borrar"
         android:textColor="#FFFFFF"
@@ -155,7 +156,7 @@
         android:shadowRadius="5" />
 
         <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn5"
+        android:id="@+id/btn_actualizar"
         android:layout_marginTop="10dp"
         android:text="Editar"
         android:textColor="#FFFFFF"
