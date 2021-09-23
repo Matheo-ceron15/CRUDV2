@@ -197,7 +197,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    public void  alta(View v){
+        if (et_codigo.getText().toString().length()==0){
 
+        }
+    }
     //==================================HA MEDIAS DE LA PAGINA 36=======================
 
 
