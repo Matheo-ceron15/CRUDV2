@@ -154,7 +154,7 @@ public class ConexionSQLite extends SQLiteOpenHelper {
         return estado;
     }
 
-    public  boolean consltarArticulos(Dto datos){
+    public  boolean consultaArticulos(Dto datos){
         boolean estado = true;
         int resultado;
         SQLiteDatabase bd = this.getWritableDatabase();
@@ -180,7 +180,7 @@ public class ConexionSQLite extends SQLiteOpenHelper {
     }
     //fin del metodo opcional
 
-    public boolean consultarDescripcion(Dto datos){
+    public boolean consultaDescripcion(Dto datos){
         boolean estado = true;
         int resultado;
         SQLiteDatabase bd= this.getWritableDatabase();
@@ -278,7 +278,7 @@ public class ConexionSQLite extends SQLiteOpenHelper {
         return  estado;
     }
 
-    public ArrayList<Dto> consultaListaArticulos(){
+    public ArrayList<Dto> consultaListaArticulosSpiner(){
         boolean estado = false;
 //SQLiteDatabase bd —— this.getWritableDatabase(),
         SQLiteDatabase bd = this.getReadableDatabase();
