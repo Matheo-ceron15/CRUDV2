@@ -40,13 +40,13 @@
             android:layout_width="match_parent"
             android:layout_height="3dp"/>
     </LinearLayout>
+
     <ListView
         android:id="@+id/listViewPersonas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="35dp"
-        />
+        android:layout_marginBottom="35dp" />
     <TextView
         android:id="@+id/tv_destino"
         android:layout_width="wrap_content"
