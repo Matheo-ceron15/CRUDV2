@@ -10,62 +10,64 @@
     >
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Busqueda por Codigo"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="25dp"
-        android:textSize="20dp"
-        />
+        android:text="Busqueda por codigo"
+        android:textSize="20dp" />
+
     <EditText
-        android:id="@+id/et_cod"
+        android:id="@+id/et1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="55dp"
-
+        android:paddingLeft="25sp"
+        android:drawableStart="@drawable/descripcion"
+        android:background="@drawable/botones2"
         android:drawablePadding="5dp"
-        android:hint="Ingrese el código"
+        android:hint="Ingrese codigo"
         android:inputType="number"
-        android:paddingLeft="25dp" />
+ />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_buscar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="62dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="130dp"
         android:layout_marginRight="100dp"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="0dp"
-
-        android:paddingLeft="10dp"
-        android:shadowColor="#2314A8"
-        android:shadowDx="-3"
-        android:shadowDy="0"
-        android:shadowRadius="8"
+        android:background="@drawable/ventana1"
+        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="Buscar"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+        android:textSize="10sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
+
         <TextView
             android:id="@+id/tv_close"
             android:layout_width="30dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="25dp"
-            android:textColor="#FF0000"
             android:text="X"
             android:textAlignment="center"
-            android:textSize="20dp"
-
-            android:layout_marginRight="10dp"
-            />
+            android:textColor="#FF0000"
+            android:background="@drawable/circulo1"
+            android:textSize="20dp" />
     </LinearLayout>
 
 
